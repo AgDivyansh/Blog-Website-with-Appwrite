@@ -1,6 +1,6 @@
 import conf from "../conf/conf"
 
-import { Client, ID, Databases, Storage, Query } from "appwrite"
+import { Client, ID, Databases, Storage, Query, Account } from "appwrite"
 
 
 export class Service {
@@ -26,8 +26,8 @@ export class Service {
     {
         try {
                 return await this.databases.createDocument(
-                    conf.appwriteDATABASEId,
-                    conf.appwriteCOLLECTIONId,
+                    conf.appwriteDatabaseId,
+                    conf.appwriteCollectionId,
                     slug,
                     {
                         title,
@@ -44,12 +44,12 @@ export class Service {
     }
 
 
-    async updatePost ({slug, content, featuredImage, status})
+    async updatePost ({slug, title, content, featuredImage, status})
     {
         try {
             return await this.databases.updateDocument(
-                conf.appwriteDATABASEId,
-                conf.appwriteCOLLECTIONId,
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
                 slug,
                 {
                     title,
@@ -68,8 +68,8 @@ export class Service {
     {
         try {
             await this.databases.deleteDocument(
-                    conf.appwriteDATABASEId,
-                    conf.appwriteCOLLECTIONId,
+                    conf.appwriteDatabaseId,
+                    conf.appwriteCollectionId,
                     slug,
 
                 )
@@ -85,8 +85,8 @@ export class Service {
     {
         try {
             return await this.databases.getDocument(
-                conf.appwriteDATABASEId,
-                conf.appwriteCOLLECTIONId,
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
                 slug
             )
         } catch (error) {
@@ -99,8 +99,8 @@ export class Service {
     {
         try {
             return await this.databases.listDocuments(
-                conf.appwriteDATABASEId,
-                conf.appwriteCOLLECTIONId,
+                conf.appwriteDatabaseId,
+                conf.appwriteCollectionId,
                 queries,
             )
         } catch (error) {
@@ -117,7 +117,7 @@ export class Service {
     {
         try {
             return await this.bucket.createFile (
-                conf.appwriteBUCKETId,
+                conf.appwriteBucketId,
                 ID.unique(),
                 file
             )
@@ -130,10 +130,8 @@ export class Service {
     async deleteFile (fileId)
     {
         try {
-             await this.bucket.deleteFile
-             (
-
-                 conf.appwriteBUCKETId,
+             await this.bucket.deleteFile(
+                 conf.appwriteBucketId,
                  fileId
                 )
             
@@ -147,7 +145,7 @@ export class Service {
     getFilePreview (fileId)
     {
         return this.bucket.getFilePreview(
-            conf.appwriteBUCKETId,
+            conf.appwriteBucketId,
             fileId
         )
     }
