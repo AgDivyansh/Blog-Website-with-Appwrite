@@ -45,7 +45,6 @@ function Header() {
               <Logo width="70px" />
             </Link>
           </div>
-        </nav>
 
         <ul className="flex ml-auto">
           {navItems.map((item) =>
@@ -69,6 +68,8 @@ function Header() {
             </li>
           )}
         </ul>
+        </nav>
+
       </Container>
     </header>
   );
