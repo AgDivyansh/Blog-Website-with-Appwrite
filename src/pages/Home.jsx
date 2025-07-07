@@ -5,13 +5,24 @@ import { Container, PostCard } from "../components";
 function Home() {
   const [posts, setPosts] = useState([]);
 
+  // useEffect(() => {
+  //   appwriteService.getPosts().then((posts) => {
+  //     if (posts) {
+  //       setPosts(posts);
+  //     }
+  //   });
+  // }, []);
+
+
   useEffect(() => {
-    appwriteService.getPosts().then((posts) => {
-      if (posts) {
-        setPosts(posts);
-      }
-    });
-  }, []);
+  appwriteService.getPosts().then((response) => {
+    if (response && Array.isArray(response.documents)) {
+      setPosts(response.documents);
+    } else {
+      setPosts([]); // fallback to prevent map crash
+    }
+  });
+}, []);
 
   if ( posts && posts.length === 0) {
     return (

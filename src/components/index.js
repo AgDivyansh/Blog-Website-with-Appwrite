@@ -33,6 +33,7 @@ export {
     PostCard,
     AllPost,
     AuthLayout,
-    Select
-    
+    Select,
 }
+
+
